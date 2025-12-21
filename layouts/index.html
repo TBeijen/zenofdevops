@@ -1,0 +1,32 @@
+{{ define "main" }}
+<main>
+    <header>
+        <h1>{{ .Site.Data.zen.meta.title }}</h1>
+    </header>
+
+    <!-- Concise list -->
+    <ol>
+        {{ range .Site.Data.zen.items }}
+        <li>
+            <a href="#{{ .id }}">{{ .title }}</a>
+        </li>
+        {{ end }}
+    </ol>
+
+    <!-- Detailed explanations -->
+    {{ range .Site.Data.zen.items }}
+    <section id="{{ .id }}">
+        <h2>{{ .title }}</h2>
+
+        {{ if .python }}
+        <span class="badge python">Python</span>
+        {{ end }}
+        {{ if .devops }}
+        <span class="badge devops">DevOps</span>
+        {{ end }}
+
+        <p>{{ .description | markdownify }}</p>
+    </section>
+    {{ end }}
+</main>
+{{ end }}

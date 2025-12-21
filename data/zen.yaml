@@ -1,0 +1,14 @@
+meta:
+  title: "The Zen of DevOps"
+items:
+  - id: beautiful
+    title: Beautiful is better than ugly
+    python: true
+    devops: true
+    description: ""
+  - id: explicit
+    title: Explicit is better than implicit
+    python: true
+    devops: true
+    description: |
+      It’s better for code to be verbose and explicit.
