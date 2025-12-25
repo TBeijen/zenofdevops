@@ -1,6 +1,53 @@
 meta:
   title: "The Zen of DevOps"
 items:
+  - id: break-non-prod
+    title: Be able to break non-production systems
+    python: false
+    devops: true
+    description:  |
+      Representative non-production environments allow testing and experimentation. This will speed up delivery and help identify challenges before they become problems.
+  - id: break-non-prod-only
+    title: Be able to break non-production systems only
+    python: false
+    devops: true
+    description: |
+      Is non-production representative enough of production, to identify all possible issues?
+      
+      Is test coverage and monitoring able to catch issues, before they hit production?
+
+      After testing and fixing on non-production, is the procedure to promote changes to production robust enough? 
+  - id: more-than-one
+    title: Design for more than one
+    python: false
+    devops: true
+    description: |
+      More than one allows horizontal scaling.
+
+      More than one concurrent version allows rolling updates and canary releases.
+      
+      More than one deployment requires parametrizing the right things.
+      
+      More than one of anything requires automation.
+      
+      Can you run two of these functions? Can you add a cluster without also needing to add a VPC?
+  - id: more-than-once
+    title: Design for more than once
+    python: false
+    devops: true
+    description: |
+      Unnoticably, circular dependencies will appear. 
+      
+      In the case of incidents, disaster recovery, or needing to scale, they will become very noticable.
+
+      That thing that breaks because of an unpinned dependency? IaC that has become a monolith having too much in scope? Applications waiting for one another, that should have been rolled out in waves?
+
+      Identify those points before they become pain points, by repeatedly building things from scratch.
+  - id: fast-over-slow
+    title: Favor changes that make you faster over those that slow you down
+    python: false
+    devops: true
+    description: ""
   - id: beautiful
     title: Beautiful is better than ugly
     python: true
@@ -12,3 +59,88 @@ items:
     devops: true
     description: |
       It’s better for code to be verbose and explicit.
+  - id: simple-complex
+    title: Simple is better than complex
+    python: true
+    devops: true
+    description: ""
+  - id: complex-complicated
+    title: Complex is better than complicated
+    python: true
+    devops: true
+    description: ""
+  - id: flat-nested
+    title: Flat is better than nested
+    python: true
+    devops: false
+    description: ""
+  - id: sparse-dense
+    title: Sparse is better than dense
+    python: true
+    devops: false
+    description: ""
+  - id: readability
+    title: Readability counts
+    python: true
+    devops: false
+    description: ""
+  - id: special-cases
+    title: Special cases aren't special enough to break the rules
+    python: true
+    devops: false
+    description: ""
+  - id: practicality-purity
+    title: Although practicality beats purity
+    python: true
+    devops: false
+    description: ""
+  - id: errors-silently
+    title: Errors should never pass silently
+    python: true
+    devops: false
+    description: ""
+  - id: explicitly-silenced
+    title: Unless explicitly silenced
+    python: true
+    devops: false
+    description: ""
+  - id: ambiguity-guess
+    title: In the face of ambiguity, refuse the temptation to guess
+    python: true
+    devops: true
+    description: ""
+  - id: one-obvious-way
+    title: There should be one - and preferably only one - obvious way to do it
+    python: true
+    devops: true
+    description: ""
+  - id: may-not-obvious
+    title: Although that way may not be obvious at first unless you're Dutch
+    python: true
+    devops: false
+    description: ""
+  - id: now-better-never
+    title: Now is better than never
+    python: true
+    devops: false
+    description: ""
+  - id: never-better-right-now
+    title: Although never is often better than *right* now
+    python: true
+    devops: false
+    description: ""
+  - id: hard-bad-idea
+    title: If the implementation is hard to explain, it's a bad idea
+    python: true
+    devops: true
+    description: ""
+  - id: easy-good-idea
+    title: If the implementation is easy to explain, it may be a good idea
+    python: true
+    devops: true
+    description: ""
+  - id: namespaces
+    title: Namespaces are one honking great idea -- let's do more of those!
+    python: true
+    devops: false
+    description: ""

@@ -7,14 +7,17 @@
     <!-- Concise list -->
     <ol>
         {{ range .Site.Data.zen.items }}
+        {{ if .devops }}
         <li>
             <a href="#{{ .id }}">{{ .title }}</a>
         </li>
+        {{ end }}
         {{ end }}
     </ol>
 
     <!-- Detailed explanations -->
     {{ range .Site.Data.zen.items }}
+    {{ if .devops }}
     <section id="{{ .id }}">
         <h2>{{ .title }}</h2>
 
@@ -28,7 +31,7 @@
         <p>{{ .description | markdownify }}</p>
     </section>
     {{ end }}
-
+    {{ end }}
 
     <section>
         <p>The Zen of DevOps. Inspired by <a href="https://peps.python.org/pep-0020/">The Zen of Python</a>. Additional
