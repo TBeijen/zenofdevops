@@ -43,32 +43,59 @@ items:
       That thing that breaks because of an unpinned dependency? IaC that has become a monolith having too much in scope? Applications waiting for one another, that should have been rolled out in waves?
 
       Identify those points before they become pain points, by repeatedly building things from scratch.
+
+      This improves resilience as well as the ability to innovate and experiment.
   - id: fast-over-slow
     title: Favor changes that make you faster over those that slow you down
     python: false
     devops: true
-    description: ""
+    description: |
+      Every change that adds friction, will have a repeated cost, slowing everything down.
+
+      Every improvement that makes future changes more easy, will have a repeated benefit, speeding everything up.
+
+      Don't just add. Also remove and improve.
+      
   - id: beautiful
     title: Beautiful is better than ugly
     python: true
     devops: true
-    description: ""
+    description: |
+      Code that is pleasant to read and work with will invite contributions and improvements.
+
+      Consistent style and structure, with the right amount of guidance, improves maintainability.
   - id: explicit
     title: Explicit is better than implicit
     python: true
     devops: true
     description: |
-      It’s better for code to be verbose and explicit.
+      Explicit means less to remember, less to guess, less to misunderstand.
+
+      If certain configuration is important, make it explicit, even if it happens to be a default.
+
+      Design configuration in such a way that differences between environments are very visible.
+
+      Make visible all the config that will change when just bumping a version.
+
   - id: simple-complex
     title: Simple is better than complex
     python: true
     devops: true
-    description: ""
+    description: |
+      Simple designs are easier to understand, maintain, and improve.
+
+      Be wary of bolting on solutions that fix problems, caused by previous solutions.
+
   - id: complex-complicated
     title: Complex is better than complicated
     python: true
     devops: true
-    description: ""
+    description: |
+      At the same time, avoid the trap of ignoring challenges, and calling it simplicity.
+
+      Pain points are more likely to move around, than magically disappear.
+
+      Components can exist for good reasons, as long as they are as simple as possible.
   - id: flat-nested
     title: Flat is better than nested
     python: true
@@ -108,12 +135,24 @@ items:
     title: In the face of ambiguity, refuse the temptation to guess
     python: true
     devops: true
-    description: ""
+    description: |
+      If guessing for the cause of a problem, try to reproduce and find the root cause.
+
+      If guessing for what configuration is needed, improve the design or documentation.
+
+      If guessing what the effect of a change will be, seek ways to remove the guessing, not relying on luck.
+
+      Become a fire-preventer instead of a fire-fighter.
+
   - id: one-obvious-way
     title: There should be one - and preferably only one - obvious way to do it
     python: true
     devops: true
-    description: ""
+    description: |
+      If there are multiple ways to do something, it will be unclear which is best. Fragmentation will grow, and cost of maintenance will rise.
+
+      Limit options by design, documentation, and examples.
+
   - id: may-not-obvious
     title: Although that way may not be obvious at first unless you're Dutch
     python: true
@@ -133,12 +172,25 @@ items:
     title: If the implementation is hard to explain, it's a bad idea
     python: true
     devops: true
-    description: ""
+    description: |
+      If the following questions are hard to answer, the design may need to be revisited:
+
+      - What problem does this solve?
+      - How does it solve it?
+      - Why is this the best way to solve it?
+      - Is this problem unique to us? If so, why?
+      - How do others solve this problem?
+
   - id: easy-good-idea
     title: If the implementation is easy to explain, it may be a good idea
     python: true
     devops: true
-    description: ""
+    description: |
+      With the above questions answered, we should still consider if the underlying problem should exist in the first place.
+
+      Furthermore, situations change. Will this plan still be a good idea in the future? 
+      
+      Or are we continuing into a direction that was good once, but is not anymore?
   - id: namespaces
     title: Namespaces are one honking great idea -- let's do more of those!
     python: true
