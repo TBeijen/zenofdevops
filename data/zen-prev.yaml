@@ -5,28 +5,24 @@ items:
     title: Be able to break non-production systems
     python: false
     devops: true
-    description: |
-      Representative non-production environments enable safe experimentation. 
-      
-      Use them to speed up delivery and identify challenges before they become problems.
-
+    description:  |
+      Representative non-production environments allow testing and experimentation. This will speed up delivery and help identify challenges before they become problems.
   - id: break-non-prod-only
     title: Be able to break non-production systems only
     python: false
     devops: true
     description: |
-      Non-production environments must be representative enough to catch issues.
+      Is non-production representative enough of production, to identify all possible issues?
+      
+      Is test coverage and monitoring able to catch issues, before they hit production?
 
-      Testing and observability needs to be sufficient to catch issues.
-
-      Promotion procedures need to be robust enough to avoid introducing issues on production. 
-
+      After testing and fixing on non-production, is the procedure to promote changes to production robust enough? 
   - id: more-than-one
     title: Design for more than one
     python: false
     devops: true
     description: |
-      More than one instance allows horizontal scaling and provides resilience.
+      More than one allows horizontal scaling.
 
       More than one concurrent version allows rolling updates and canary releases.
       
@@ -34,68 +30,72 @@ items:
       
       More than one of anything requires automation.
       
-      Design for more than one, to stay ahead of scaling and resilience needs.
-
+      Can you run two of these functions? Can you add a cluster without also needing to add a VPC?
   - id: more-than-once
     title: Design for more than once
     python: false
     devops: true
     description: |
-      Hidden dependencies often only appear during disaster recovery or scaling. 
+      Unnoticably, circular dependencies will appear. 
       
-      Regularly build environments from scratch to expose and fix these fragility points, before they turn into 'technical debt'.
+      In the case of incidents, disaster recovery, or needing to scale, they will become very noticable.
 
+      That thing that breaks because of an unpinned dependency? IaC that has become a monolith having too much in scope? Applications waiting for one another, that should have been rolled out in waves?
+
+      Identify those points before they become pain points, by repeatedly building things from scratch.
+
+      This improves resilience as well as the ability to innovate and experiment.
   - id: fast-over-slow
     title: Favor changes that make you faster over those that slow you down
     python: false
     devops: true
     description: |
-      Friction compounds over time, while improvements pay recurring dividends. 
-      
-      Prioritize work that reduces drag and simplifies future changes over quick fixes.
+      Every change that adds friction, will have a repeated cost, slowing everything down.
 
+      Every improvement that makes future changes more easy, will have a repeated benefit, speeding everything up.
+
+      Don't just add. Also remove and improve.
+      
   - id: beautiful
     title: Beautiful is better than ugly
     python: true
     devops: true
     description: |
-      Clean, readable code invites contribution and reduces cognitive load. 
-      
-      Enforce consistent style and structure to make maintenance easier for everyone.
+      Code that is pleasant to read and work with will invite contributions and improvements.
 
+      Consistent style and structure, with the right amount of guidance, improves maintainability.
   - id: explicit
     title: Explicit is better than implicit
     python: true
     devops: true
     description: |
-      Hidden magic, while solving a need, can be hard to reason about.
+      Explicit means less to remember, less to guess, less to misunderstand.
 
-      Configuration values might be deliberately chosen, even though they are defaults.
-      
-      Implicit behavior hides important details and can lead to misunderstandings.
+      If certain configuration is important, make it explicit, even if it happens to be a default.
 
-      Consciously choose what to make explicit.
+      Design configuration in such a way that differences between environments are very visible.
+
+      Make visible all the config that will change when just bumping a version.
 
   - id: simple-complex
     title: Simple is better than complex
     python: true
     devops: true
     description: |
-      Simple designs are easier to understand, maintain, and scale. 
-      
-      Avoid complex solutions that merely patch problems caused by previous complexity.
+      Simple designs are easier to understand, maintain, and improve.
+
+      Be wary of bolting on solutions that fix problems, caused by previous solutions.
 
   - id: complex-complicated
     title: Complex is better than complicated
     python: true
     devops: true
     description: |
-      Ignoring complexity can lead to complicated problems.
+      At the same time, avoid the trap of ignoring challenges, and calling it simplicity.
 
-      Necessary complexity is better than artificial simplicity. 
-      
-      Accept required components, but keep their implementation as simple as possible.
+      Pain points are more likely to move around, than magically disappear.
 
+      Components can exist for good reasons, as long as they are as simple as possible.
   - id: flat-nested
     title: Flat is better than nested
     python: true
@@ -124,12 +124,12 @@ items:
   - id: errors-silently
     title: Errors should never pass silently
     python: true
-    devops: true
+    devops: false
     description: ""
   - id: explicitly-silenced
     title: Unless explicitly silenced
     python: true
-    devops: true
+    devops: false
     description: ""
   - id: ambiguity-guess
     title: In the face of ambiguity, refuse the temptation to guess
@@ -138,7 +138,7 @@ items:
     description: |
       If guessing for the cause of a problem, try to reproduce and find the root cause.
 
-      If guessing for the purpose of a component or piece of configuration, improve the design or documentation.
+      If guessing for what configuration is needed, improve the design or documentation.
 
       If guessing what the effect of a change will be, seek ways to remove the guessing, not relying on luck.
 
@@ -149,9 +149,9 @@ items:
     python: true
     devops: true
     description: |
-      Multiple approaches lead to fragmentation, confusion and cognitive load. 
-      
-      Limit options through clear design, documentation, and standardized examples.
+      If there are multiple ways to do something, it will be unclear which is best. Fragmentation will grow, and cost of maintenance will rise.
+
+      Limit options by design, documentation, and examples.
 
   - id: may-not-obvious
     title: Although that way may not be obvious at first unless you're Dutch
@@ -173,14 +173,24 @@ items:
     python: true
     devops: true
     description: |
-      If a design is difficult to justify or explain, it is likely flawed. Ensure you can clearly articulate the problem, the solution, and why it is the best approach.
+      If the following questions are hard to answer, the design may need to be revisited:
+
+      - What problem does this solve?
+      - How does it solve it?
+      - Why is this the best way to solve it?
+      - Is this problem unique to us? If so, why?
+      - How do others solve this problem?
 
   - id: easy-good-idea
     title: If the implementation is easy to explain, it may be a good idea
     python: true
     devops: true
     description: |
-      Even if a solution is easy to explain, question if the underlying problem should exist at all. Verify that the approach remains valid as requirements evolve.
+      With the above questions answered, we should still consider if the underlying problem should exist in the first place.
+
+      Furthermore, situations change. Will this plan still be a good idea in the future? 
+      
+      Or are we continuing into a direction that was good once, but is not anymore?
   - id: namespaces
     title: Namespaces are one honking great idea -- let's do more of those!
     python: true
