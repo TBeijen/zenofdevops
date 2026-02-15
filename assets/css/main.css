@@ -1,24 +1,32 @@
 /* -------------------------------------------------
    Zen of DevOps
-   Single-domain, system-font, dark-first CSS
-   Palette derived from tbnl screen.css
+   Ice palette, scenic background, panel layout
+   Inspired by slidev-theme-zen (ice accent)
    ------------------------------------------------- */
 
 :root {
-    /* Colors */
-    --bg: #0c161d;
-    --fg: #e6eef4;
-    --fg-muted: #9aa6ad;
+    /* Ice palette (from slidev-theme-zen) */
+    --zen-color-light: hsl(207deg 37% 42%);
+    --zen-color-mid: hsl(207deg 37% 32%);
+    --zen-color-dark: hsl(207deg 37% 22%);
+    --zen-color-black: hsl(207deg 37% 16%);
 
-    --heading: #679ec2;
-    --link: #ba91aa;
-    --link-hover: #679ec2;
+    /* Panel */
+    --zen-panel-bg: rgba(255, 255, 255, 0.84);
+    --zen-panel-radius: 6px;
+    --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+    --zen-panel-padding-x: clamp(1.25rem, 4vw, 2.75rem);
+    --zen-panel-padding-y: clamp(1.5rem, 3vw, 2.5rem);
+    --zen-bg-blur: 6px;
 
-    --border: #1b3141;
+    /* Scene */
+    --scene-bg: #0b0f12;
 
     /* Typography */
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro",
+        Menlo, Consolas, "DejaVu Sans Mono", monospace;
 
     --line-height: 1.65;
 }
@@ -34,8 +42,8 @@
 }
 
 html {
-    background: var(--bg);
-    color: var(--fg);
+    background: var(--scene-bg);
+    color: var(--zen-color-black);
     font-family: var(--font-sans);
     line-height: var(--line-height);
 }
@@ -43,6 +51,34 @@ html {
 body {
     margin: 0;
     padding: 2rem 1.25rem;
+    min-height: 100vh;
+}
+
+/* -------------------------------------------------
+   Background Scene
+   ------------------------------------------------- */
+
+.bg-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+
+    /* Slight dim overlay via pseudo-element */
+}
+
+.bg-scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(10, 16, 22, 0.15) 0%,
+            rgba(10, 16, 22, 0.25) 50%,
+            rgba(10, 16, 22, 0.40) 100%);
 }
 
 /* -------------------------------------------------
@@ -50,8 +86,32 @@ body {
    ------------------------------------------------- */
 
 main {
+    position: relative;
+    z-index: 1;
     max-width: 48rem;
     margin: 0 auto;
+}
+
+/* -------------------------------------------------
+   Panel
+   ------------------------------------------------- */
+
+.zen-panel {
+    background: var(--zen-panel-bg);
+    border-radius: var(--zen-panel-radius);
+    padding: var(--zen-panel-padding-y) var(--zen-panel-padding-x);
+    box-shadow: var(--zen-panel-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(var(--zen-bg-blur)) saturate(1.08);
+    -webkit-backdrop-filter: blur(var(--zen-bg-blur)) saturate(1.08);
+}
+
+.zen-hero {
+    margin-bottom: 2rem;
+}
+
+.zen-details {
+    margin-bottom: 2rem;
 }
 
 /* -------------------------------------------------
@@ -61,14 +121,15 @@ main {
 h1,
 h2,
 h3 {
-    color: var(--heading);
+    color: var(--zen-color-mid);
     font-weight: 500;
     line-height: 1.25;
 }
 
 h1 {
     font-size: 2rem;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.25rem;
+    color: var(--zen-color-dark);
 }
 
 h2 {
@@ -87,32 +148,64 @@ h3 {
 
 p {
     margin: 0.5rem 0 0;
+    color: var(--zen-color-black);
 }
 
 .muted,
 small {
-    color: var(--fg-muted);
+    color: var(--zen-color-light);
 }
 
 /* -------------------------------------------------
-   Lists
+   Code-block list (zen items as code)
    ------------------------------------------------- */
 
-ol {
-    margin: 0 0 2rem;
-    padding-left: 1.25rem;
+.zen-codelist {
+    background: var(--zen-color-black);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
 }
 
-ol li {
-    margin: 0.4rem 0;
+.zen-codelist ol {
+    margin: 0;
+    padding-left: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    list-style-type: decimal;
+}
+
+.zen-codelist ol li {
+    margin: 0;
+    color: hsl(207deg 30% 65%);
+}
+
+.zen-codelist ol li::marker {
+    color: hsl(207deg 20% 40%);
+}
+
+.zen-codelist ol li a {
+    color: hsl(207deg 40% 75%);
+    text-decoration: none;
+}
+
+.zen-codelist ol li a:hover,
+.zen-codelist ol li a:focus {
+    color: hsl(207deg 50% 85%);
+    text-decoration: underline;
 }
 
 /* -------------------------------------------------
-   Sections
+   Sections (detail items)
    ------------------------------------------------- */
 
 section {
     padding-top: 0.5rem;
+}
+
+section + section {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* -------------------------------------------------
@@ -120,13 +213,13 @@ section {
    ------------------------------------------------- */
 
 a {
-    color: var(--link);
+    color: var(--zen-color-mid);
     text-decoration: none;
 }
 
 a:hover,
 a:focus {
-    color: var(--link-hover);
+    color: var(--zen-color-dark);
     text-decoration: underline;
 }
 
@@ -140,16 +233,31 @@ a:focus {
     padding: 0.15rem 0.4rem;
     margin-right: 0.25rem;
     border-radius: 3px;
-    background: var(--border);
-    color: var(--fg-muted);
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--zen-color-light);
 }
 
 .badge.python {
-    color: var(--heading);
+    color: var(--zen-color-mid);
 }
 
 .badge.devops {
-    color: var(--link);
+    color: hsl(207deg 45% 35%);
+}
+
+/* -------------------------------------------------
+   Footer section
+   ------------------------------------------------- */
+
+.zen-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.zen-footer p {
+    color: var(--zen-color-light);
+    font-size: 0.9rem;
 }
 
 /* -------------------------------------------------
@@ -158,7 +266,7 @@ a:focus {
 
 hr {
     border: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
     margin: 3rem 0;
 }
 
@@ -167,6 +275,29 @@ hr {
    ------------------------------------------------- */
 
 ::selection {
-    background: var(--link);
-    color: var(--bg);
+    background: var(--zen-color-mid);
+    color: #fff;
+}
+
+/* -------------------------------------------------
+   Responsive
+   ------------------------------------------------- */
+
+@media (max-width: 640px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+
+    .zen-codelist {
+        padding: 0.75rem 0.75rem;
+    }
+
+    .zen-codelist ol {
+        font-size: 0.75rem;
+        padding-left: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
 }

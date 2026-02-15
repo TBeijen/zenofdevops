@@ -8,11 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ $css := resources.Get "css/main.css" | resources.Minify }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+    {{/* Process background image: resize for web, output as JPEG */}}
+    {{ $bg := resources.Get "images/bg-lake-sunrise.jpg" }}
+    {{ $bgOptimized := $bg.Resize "2400x q85" }}
+    <link rel="preload" as="image" href="{{ $bgOptimized.RelPermalink }}">
 </head>
 
 <body>
+    <div class="bg-scene" style="background-image: url('{{ $bgOptimized.RelPermalink }}');"></div>
+
     {{ block "main" . }}{{ end }}
 
+    {{ with resources.Get "js/parallax.js" }}
+    <script src="{{ .RelPermalink }}"></script>
+    {{ end }}
     {{ with resources.Get "js/theme.js" }}
     <script src="{{ .RelPermalink }}"></script>
     {{ end }}
