@@ -355,8 +355,8 @@ section:hover .anchor-link:hover {
 .back-to-top {
     position: fixed;
     bottom: 2rem;
-    /* Align with the right edge of the content column */
-    right: calc(50% - 24rem + 0.5rem);
+    /* Center of button aligns with right edge of dark code-block panel */
+    right: calc(50% - 24rem + var(--zen-panel-padding-x) - 1.25rem);
     z-index: 10;
 
     display: flex;
