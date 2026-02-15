@@ -141,6 +141,19 @@ h1 {
     color: var(--zen-color-dark);
 }
 
+/* Title link: inherits heading color, no underline */
+.title-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.title-link:hover,
+.title-link:focus {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
 h2 {
     font-size: 1.25rem;
     margin: 2.5rem 0 0.5rem;
@@ -277,6 +290,118 @@ hr {
     border: none;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
     margin: 3rem 0;
+}
+
+/* -------------------------------------------------
+   Anchor links (paragraph icons)
+   ------------------------------------------------- */
+
+.anchor-link {
+    margin-left: 0.4em;
+    font-size: 0.85em;
+    font-weight: 400;
+    color: var(--zen-color-light);
+    opacity: 0.35;
+    text-decoration: none;
+    position: relative;
+    transition: opacity 0.2s ease;
+}
+
+.anchor-link:hover,
+.anchor-link:focus {
+    opacity: 1;
+    color: var(--zen-color-mid);
+    text-decoration: none;
+}
+
+/* On section hover, reveal the anchor more */
+section:hover .anchor-link {
+    opacity: 0.6;
+}
+
+section:hover .anchor-link:hover {
+    opacity: 1;
+}
+
+/* "Copied!" tooltip */
+.anchor-link.copied::after {
+    content: 'Copied!';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #fff;
+    background: var(--zen-color-dark);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: tooltip-fade 2s ease forwards;
+}
+
+@keyframes tooltip-fade {
+    0%   { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* -------------------------------------------------
+   Back to top
+   ------------------------------------------------- */
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    /* Align with the right edge of the content column */
+    right: calc(50% - 24rem + 0.5rem);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+
+    background: var(--zen-panel-bg);
+    backdrop-filter: blur(var(--zen-bg-blur));
+    -webkit-backdrop-filter: blur(var(--zen-bg-blur));
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+    color: var(--zen-color-mid);
+    font-size: 1.1rem;
+    text-decoration: none;
+    line-height: 1;
+
+    /* Hidden by default — JS adds .visible */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(0.5rem);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+    color: var(--zen-color-dark);
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* On smaller screens, position from right edge instead */
+@media (max-width: 52rem) {
+    .back-to-top {
+        right: 1.5rem;
+    }
 }
 
 /* -------------------------------------------------

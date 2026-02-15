@@ -3,7 +3,7 @@
     <!-- Hero: title + concise code-block list -->
     <div class="zen-panel zen-hero">
         <header>
-            <h1>{{ .Site.Data.zen.meta.title }}</h1>
+            <h1><a href="/" class="title-link">{{ .Site.Data.zen.meta.title }}</a></h1>
         </header>
 
         <div class="zen-codelist">
@@ -24,7 +24,10 @@
         {{ range .Site.Data.zen.items }}
         {{ if .devops }}
         <section id="{{ .id }}">
-            <h2>{{ .title }}</h2>
+            <h2>
+                {{ .title }}
+                <a href="#{{ .id }}" class="anchor-link" aria-label="Link to this section">#</a>
+            </h2>
 
             {{ if .python }}
             <span class="badge python">Python</span>
@@ -44,5 +47,7 @@
             </p>
         </section>
     </div>
+
+    <a href="#" class="back-to-top" aria-label="Back to top">&uarr;</a>
 </main>
 {{ end }}
