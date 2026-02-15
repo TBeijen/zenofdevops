@@ -26,7 +26,7 @@ Markdown content provides:
 - narrative guidance
 - navigation context
 
-Meaning must always be derived from structured YAML data,
+Meaning of the zen principles must always be derived from structured YAML data,
 not duplicated or reinterpreted inside page templates.
 
 ---
@@ -97,6 +97,7 @@ Design should:
 - prefer typography over ornamentation
 - communicate structure through layout
 - support uninterrupted reading
+- For the main content, being the list of guidelines, consider monospaced fonts, to emphasize the tech field it applies to.
 
 Avoid:
 
@@ -121,7 +122,7 @@ Interaction must not become:
 All styling must:
 
 - use plain CSS
-- assume modern evergreen browsers
+- assume modern browsers
 - support progressive enhancement
 
 No:
