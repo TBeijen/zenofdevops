@@ -6,9 +6,9 @@ items:
     python: false
     devops: true
     description: |
-      Representative non-production environments enable safe experimentation. 
-      
-      Use them to speed up delivery and identify challenges before they become problems.
+      Non-production environments enable safe experimentation, speeding up delivery.
+
+      Any challenge identified and resolved in non-production is one less risk to worry about on production.
 
   - id: break-non-prod-only
     title: Be able to break non-production systems only
@@ -19,7 +19,9 @@ items:
 
       Testing and observability needs to be sufficient to catch issues.
 
-      Promotion procedures need to be robust enough to avoid introducing issues on production. 
+      Isolation and guardrails should prevent accidentally breaking production.
+
+      Promotion procedures need to be robust enough to avoid introducing issues on production.
 
   - id: more-than-one
     title: Design for more than one
@@ -29,11 +31,11 @@ items:
       More than one instance allows horizontal scaling and provides resilience.
 
       More than one concurrent version allows rolling updates and canary releases.
-      
+
       More than one deployment requires parametrizing the right things.
-      
+
       More than one of anything requires automation.
-      
+
       Design for more than one, to stay ahead of scaling and resilience needs.
 
   - id: more-than-once
@@ -41,17 +43,19 @@ items:
     python: false
     devops: true
     description: |
-      Hidden dependencies often only appear during disaster recovery or scaling. 
+      Hidden dependencies often only appear during disaster recovery or scaling.
       
-      Regularly build environments from scratch to expose and fix these fragility points, before they turn into 'technical debt'.
+      More than once, allows upgrades to be repeatedly tested.
+
+      Embed rebuilding and repetition into automated processes, to identify fragility points before they turn into technical debt.
 
   - id: fast-over-slow
     title: Favor changes that make you faster over those that slow you down
     python: false
     devops: true
     description: |
-      Friction compounds over time, while improvements pay recurring dividends. 
-      
+      Friction compounds over time, while improvements pay recurring dividends.
+
       Prioritize work that reduces drag and simplifies future changes over quick fixes.
 
   - id: beautiful
@@ -59,8 +63,8 @@ items:
     python: true
     devops: true
     description: |
-      Clean, readable code invites contribution and reduces cognitive load. 
-      
+      Clean, readable code invites contribution and reduces cognitive load.
+
       Enforce consistent style and structure to make maintenance easier for everyone.
 
   - id: explicit
@@ -68,22 +72,24 @@ items:
     python: true
     devops: true
     description: |
-      Hidden magic, while solving a need, can be hard to reason about.
+      Hidden logic, while solving a need, can be hard to reason about.
 
       Configuration values might be deliberately chosen, even though they are defaults.
-      
+
       Implicit behavior hides important details and can lead to misunderstandings.
 
-      Consciously choose what to make explicit.
+      Consciously choose what to expose and what to hide, guiding future changes.
 
   - id: simple-complex
     title: Simple is better than complex
     python: true
     devops: true
     description: |
-      Simple designs are easier to understand, maintain, and scale. 
-      
-      Avoid complex solutions that merely patch problems caused by previous complexity.
+      Simple designs are easier to understand, maintain, and scale.
+
+      Accept required components, but keep their implementation as simple as possible.
+
+      Prefer removing problems over adding solutions.
 
   - id: complex-complicated
     title: Complex is better than complicated
@@ -92,9 +98,9 @@ items:
     description: |
       Ignoring complexity can lead to complicated problems.
 
-      Necessary complexity is better than artificial simplicity. 
-      
-      Accept required components, but keep their implementation as simple as possible.
+      Address essential complexity, while keeping accidental complexity to a minimum.
+
+      Avoid ignoring essential complexity by artificial simplicity.
 
   - id: flat-nested
     title: Flat is better than nested
@@ -125,12 +131,22 @@ items:
     title: Errors should never pass silently
     python: true
     devops: true
-    description: ""
+    description: |
+      Make errors something that can be observed, diagnosed, and addressed.
+
+      If something unexpected is encountered, do not ignore it.
+
+      Blameless culture and post-mortems help turn errors into learning opportunities.
+
   - id: explicitly-silenced
     title: Unless explicitly silenced
     python: true
     devops: true
-    description: ""
+    description: |
+      When not addressing an error, make the decision to defer it explicit.
+
+      When accepting a certain risk, make that decision explicit.
+
   - id: ambiguity-guess
     title: In the face of ambiguity, refuse the temptation to guess
     python: true
@@ -150,8 +166,10 @@ items:
     devops: true
     description: |
       Multiple approaches lead to fragmentation, confusion and cognitive load. 
-      
+
       Limit options through clear design, documentation, and standardized examples.
+
+      Follow common patterns and conventions, to make it easier for others to understand and contribute.
 
   - id: may-not-obvious
     title: Although that way may not be obvious at first unless you're Dutch
@@ -173,14 +191,17 @@ items:
     python: true
     devops: true
     description: |
-      If a design is difficult to justify or explain, it is likely flawed. Ensure you can clearly articulate the problem, the solution, and why it is the best approach.
+      If a design is difficult to explain, it is likely flawed. 
+
+      If the need for a design is difficult to explain, it might not be needed at all.
 
   - id: easy-good-idea
     title: If the implementation is easy to explain, it may be a good idea
     python: true
     devops: true
     description: |
-      Even if a solution is easy to explain, question if the underlying problem should exist at all. Verify that the approach remains valid as requirements evolve.
+      Even if a design is easy to explain, underlying assumptions might not be accurate, or change over time.
+
   - id: namespaces
     title: Namespaces are one honking great idea -- let's do more of those!
     python: true
