@@ -1,24 +1,45 @@
 /*
  * Parallax scroll for background scene.
- * Progressive enhancement: without JS, .bg-scene is fixed via CSS.
- * With JS, a subtle translateY shift is applied on scroll.
+ * Progressive enhancement: without JS, .bg-scene is fixed via CSS
+ * at top:0, oversized to 140vh so the lower ~40vh overflows below
+ * the viewport.
+ * With JS, the scene is translated upward as the user scrolls,
+ * revealing the lower part of the image. The max shift equals the
+ * overflow (height - 100vh), so the bottom edge aligns with the
+ * viewport bottom at full scroll.
  */
 ;(function () {
   var scene = document.querySelector('.bg-scene')
   if (!scene) return
 
-  // Parallax factor: how much the bg moves relative to scroll.
-  // 0 = fully fixed, 1 = scrolls with page. 0.15 = subtle drift.
-  var factor = 0.15
   var ticking = false
+
+  function getMaxShift() {
+    // The overflow: how much taller the scene is than the viewport
+    return scene.offsetHeight - window.innerHeight
+  }
 
   function update() {
     var scrollY = window.pageYOffset || document.documentElement.scrollTop
-    scene.style.transform = 'translateY(' + (scrollY * factor) + 'px)'
+    var maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    var maxShift = getMaxShift()
+
+    var progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0
+    var shift = progress * maxShift
+
+    scene.style.transform = 'translateY(' + (-shift) + 'px)'
     ticking = false
   }
 
   window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(update)
+      ticking = true
+    }
+  }, { passive: true })
+
+  // Recalculate on resize
+  window.addEventListener('resize', function () {
     if (!ticking) {
       requestAnimationFrame(update)
       ticking = true

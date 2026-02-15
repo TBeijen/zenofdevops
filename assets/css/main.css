@@ -60,14 +60,23 @@ body {
 
 .bg-scene {
     position: fixed;
-    inset: 0;
+    left: 0;
+    right: 0;
     z-index: 0;
 
+    /*
+     * Oversized: 140vh tall so ~40vh hangs below the viewport.
+     * JS shifts it upward on scroll via translateY.
+     * Without JS it just sits at top:0 showing the upper portion.
+     */
+    top: 0;
+    height: 140vh;
+
     background-size: cover;
-    background-position: center 30%;
+    background-position: center center;
     background-repeat: no-repeat;
 
-    /* Slight dim overlay via pseudo-element */
+    will-change: transform;
 }
 
 .bg-scene::after {
