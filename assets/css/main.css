@@ -12,12 +12,12 @@
     --zen-color-black: hsl(207deg 37% 16%);
 
     /* Panel */
-    --zen-panel-bg: rgba(255, 255, 255, 0.84);
+    --zen-panel-bg: rgba(255, 255, 255, 0.80);
     --zen-panel-radius: 6px;
     --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
     --zen-panel-padding-x: clamp(1.25rem, 4vw, 2.75rem);
     --zen-panel-padding-y: clamp(1.5rem, 3vw, 2.5rem);
-    --zen-bg-blur: 6px;
+    --zen-bg-blur: 10px;
 
     /* Scene */
     --scene-bg: #0b0f12;
