@@ -9,9 +9,9 @@
     {{ $css := resources.Get "css/main.css" | resources.Minify }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
-    {{/* Process background image: resize for web, output as JPEG */}}
-    {{ $bg := resources.Get "images/bg-lake-sunrise.jpg" }}
-    {{ $bgOptimized := $bg.Resize "2400x q85" }}
+    {{/* Process background image: convert PNG to JPEG for web */}}
+    {{ $bg := resources.Get "images/bg-lake-sunrise-ai.png" }}
+    {{ $bgOptimized := $bg.Process "jpg q85" }}
     <link rel="preload" as="image" href="{{ $bgOptimized.RelPermalink }}">
 </head>
 
