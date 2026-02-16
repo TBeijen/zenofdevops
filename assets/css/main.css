@@ -272,6 +272,26 @@ a:focus {
 }
 
 /* -------------------------------------------------
+   Back link (non-homepage navigation)
+   ------------------------------------------------- */
+
+.back-link {
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.back-link a {
+    color: var(--zen-color-light);
+    text-decoration: none;
+}
+
+.back-link a:hover,
+.back-link a:focus {
+    color: var(--zen-color-mid);
+    text-decoration: none;
+}
+
+/* -------------------------------------------------
    Footer section
    ------------------------------------------------- */
 
@@ -279,6 +299,7 @@ a:focus {
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
+    text-align: center;
 }
 
 .zen-footer p {
