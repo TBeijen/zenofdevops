@@ -27,6 +27,14 @@ Adapt!
 
 ## Privacy & cookies
 
+This site is hosted on Cloudflare Pages and uses Cloudflare Web Analytics
+for basic usage statistics such as page views, referrers, and country.
+Cloudflare Web Analytics does not use cookies, local storage,
+or fingerprinting to identify visitors.
+
+This site does not use any other analytics, advertising scripts,
+social buttons, or third-party resources. All assets are self-hosted.
+No cookie banner is needed because no cookies are set.
 
 ## Copyright
 
