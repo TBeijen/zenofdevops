@@ -222,6 +222,22 @@ blockquote p {
     list-style-type: decimal;
 }
 
+.zen-import {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    padding-left: 1.75rem;
+    margin-bottom: 1.8em;
+}
+
+.zen-import .keyword {
+    color: hsl(207deg 30% 65%);
+}
+
+.zen-import .module {
+    color: hsl(207deg 40% 75%);
+}
+
 .zen-codelist ol li {
     margin: 0;
     color: hsl(207deg 30% 65%);
