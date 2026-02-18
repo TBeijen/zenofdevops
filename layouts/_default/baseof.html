@@ -30,8 +30,9 @@
     {{ $bgOptimized := $bg.Process "jpg q85" }}
     <link rel="preload" as="image" href="{{ $bgOptimized.RelPermalink }}">
 
-    {{/* --- OG image (1200x630 from background) --- */}}
-    {{ $ogImage := $bg.Process "fill 1200x630 jpg q85" }}
+    {{/* --- OG image (dedicated 1200x630 header) --- */}}
+    {{ $ogSrc := resources.Get "images/header-wide-1200x630.png" }}
+    {{ $ogImage := $ogSrc.Process "jpg q90" }}
 
     {{/* --- Open Graph --- */}}
     <meta property="og:site_name" content="{{ .Site.Data.zen.meta.title }}">
