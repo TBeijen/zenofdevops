@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
     {{/* Process background image: convert PNG to JPEG for web */}}
-    {{ $bg := resources.Get "images/bg-lake-sunrise.jpg" }}
+    {{ $bg := resources.Get "images/bg-lake-sunrise-gemini.png" }}
     {{ $bgOptimized := $bg.Process "jpg q85" }}
     <link rel="preload" as="image" href="{{ $bgOptimized.RelPermalink }}">
 </head>

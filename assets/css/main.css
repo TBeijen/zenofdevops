@@ -21,6 +21,8 @@
 
     /* Scene */
     --scene-bg: #0b0f12;
+    --scene-blur: 0px;
+    /* set to 0px to disable bg blur */
 
     /* Typography */
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
@@ -77,6 +79,7 @@ body {
     background-repeat: no-repeat;
 
     will-change: transform;
+    filter: blur(var(--scene-blur));
 }
 
 .bg-scene::after {
@@ -85,9 +88,9 @@ body {
     inset: 0;
     background:
         linear-gradient(180deg,
-            rgba(10, 16, 22, 0.15) 0%,
-            rgba(10, 16, 22, 0.25) 50%,
-            rgba(10, 16, 22, 0.40) 100%);
+            rgba(10, 16, 22, 0.05) 0%,
+            rgba(10, 16, 22, 0.15) 50%,
+            rgba(10, 16, 22, 0.25) 100%);
 }
 
 /* -------------------------------------------------
@@ -229,7 +232,7 @@ section {
     padding-top: 0.5rem;
 }
 
-section + section {
+section+section {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -367,9 +370,17 @@ section:hover .anchor-link:hover {
 }
 
 @keyframes tooltip-fade {
-    0%   { opacity: 1; }
-    70%  { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* -------------------------------------------------
