@@ -134,7 +134,7 @@ items:
     description: |
       Make errors something that can be observed, diagnosed, and addressed.
 
-      If something unexpected is encountered, do not ignore it.
+      If something unexpected is encountered, don't ignore it.
 
       Blameless culture and post-mortems help turn errors into learning opportunities.
 
