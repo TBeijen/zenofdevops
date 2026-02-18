@@ -26,13 +26,16 @@
 
     function updateParallax() {
       var scrollY = window.pageYOffset || document.documentElement.scrollTop
-      var maxShift = getMaxShift()
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      var fullShift = getMaxShift()
 
-      // Move background at 30% of scroll speed, capped at maxShift.
-      // Naturally adapts to page length: short pages get subtle movement,
-      // long pages get the full range.
-      var factor = 0.3
-      var shift = Math.min(scrollY * factor, maxShift)
+      // On tall pages, use the full background shift for smooth all-the-way movement.
+      // On short pages, limit the shift to a fraction of the scroll distance,
+      // so the background moves gently rather than racing ahead.
+      var maxShift = Math.min(fullShift, maxScroll * 0.5)
+
+      var progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0
+      var shift = progress * maxShift
 
       scene.style.transform = 'translateY(' + (-shift) + 'px)'
     }
