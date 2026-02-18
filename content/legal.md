@@ -1,5 +1,6 @@
 ---
 title: Copyright & Privacy
+description: "Privacy policy, copyright information, and licensing for the Zen of DevOps."
 ---
 
 ## Privacy & cookies

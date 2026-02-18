@@ -1,5 +1,6 @@
 meta:
   title: "The Zen of DevOps"
+  description: "DevOps principles inspired by the Zen of Python. A small set of guidelines that value clarity, restraint, maintainability and reliability."
 items:
   - id: break-non-prod
     title: Be able to break non-production systems
