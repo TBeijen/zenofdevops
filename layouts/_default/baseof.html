@@ -25,10 +25,13 @@
     {{ $css := resources.Get "css/main.css" | resources.Minify }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 
-    {{/* --- Background image --- */}}
-    {{ $bg := resources.Get "images/bg-lake-sunrise-gemini.png" }}
-    {{ $bgOptimized := $bg.Process "jpg q85" }}
-    <link rel="preload" as="image" href="{{ $bgOptimized.RelPermalink }}">
+    {{/* --- Background images (light / dark) --- */}}
+    {{ $bgLight := resources.Get "images/bg-lake-sunrise-gemini.png" }}
+    {{ $bgLightOpt := $bgLight.Process "jpg q85" }}
+    {{ $bgDark := resources.Get "images/bg-lake-moon-bright-gemini.jpg" }}
+    {{ $bgDarkOpt := $bgDark.Process "jpg q85" }}
+    <link rel="preload" as="image" href="{{ $bgLightOpt.RelPermalink }}">
+    <link rel="preload" as="image" href="{{ $bgDarkOpt.RelPermalink }}" media="(prefers-color-scheme: dark)">
 
     {{/* --- OG image (dedicated 1200x630 header) --- */}}
     {{ $ogSrc := resources.Get "images/header-wide-1200x630.png" }}
@@ -65,7 +68,8 @@
 </head>
 
 <body>
-    <div class="bg-scene" style="background-image: url('{{ $bgOptimized.RelPermalink }}');"></div>
+    <div class="bg-scene bg-scene-dark" style="background-image: url('{{ $bgDarkOpt.RelPermalink }}'); opacity: 0;"></div>
+    <div class="bg-scene bg-scene-light" style="background-image: url('{{ $bgLightOpt.RelPermalink }}');"></div>
 
     {{ block "main" . }}{{ end }}
 

@@ -42,6 +42,15 @@
     // Apply on load
     apply(getPreference());
 
+    // Enable background crossfade after page has settled.
+    // Kept off during initial paint so opacity snaps instantly (no flicker).
+    setTimeout(function () {
+        var scenes = document.querySelectorAll('.bg-scene');
+        for (var i = 0; i < scenes.length; i++) {
+            scenes[i].style.transition = 'opacity 0.5s ease';
+        }
+    }, 200);
+
     // React to OS theme changes (relevant when set to "auto")
     matchMedia('(prefers-color-scheme: dark)')
         .addEventListener('change', function () {
