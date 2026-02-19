@@ -228,14 +228,26 @@ blockquote p {
     line-height: 1.8;
     padding-left: 1.75rem;
     margin-bottom: 1.8em;
+    position: relative;
+}
+
+.zen-import::before {
+    content: ">>>";
+    position: absolute;
+    left: 0;
+    width: 1.75rem;
+    box-sizing: border-box;
+    padding-right: 0.35rem;
+    text-align: right;
+    color: hsl(207deg 20% 40%);
 }
 
 .zen-import .keyword {
-    color: hsl(207deg 30% 65%);
+    color: hsl(207deg 40% 75%);
 }
 
 .zen-import .module {
-    color: hsl(207deg 40% 75%);
+    color: hsl(207deg 50% 88%);
 }
 
 .zen-codelist ol li {
@@ -366,7 +378,7 @@ a:focus {
     pointer-events: none;
 }
 
-.zen-footer nav a + a::before {
+.zen-footer nav a+a::before {
     content: "\00b7";
     margin: 0 0.5em;
     color: var(--zen-color-light);
@@ -529,6 +541,15 @@ section:hover .anchor-link:hover {
     .zen-codelist ol {
         font-size: 0.75rem;
         padding-left: 1.5rem;
+    }
+
+    .zen-import {
+        font-size: 0.75rem;
+        padding-left: 1.5rem;
+    }
+
+    .zen-import::before {
+        width: 1.5rem;
     }
 
     h1 {
