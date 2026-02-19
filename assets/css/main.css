@@ -20,6 +20,9 @@
     --zen-panel-border: rgba(255, 255, 255, 0.45);
     --zen-bg-blur: 10px;
 
+    /* Codelist */
+    --zen-codelist-bg: hsl(207deg 37% 16%);
+
     /* Borders & overlays */
     --zen-overlay-subtle: rgba(0, 0, 0, 0.03);
     --zen-border-subtle: rgba(0, 0, 0, 0.06);
@@ -216,7 +219,7 @@ blockquote p {
    ------------------------------------------------- */
 
 .zen-codelist {
-    background: var(--zen-color-black);
+    background: var(--zen-codelist-bg);
     border-radius: 4px;
     padding: 1rem 1.25rem;
     overflow-x: auto;
@@ -317,15 +320,7 @@ a:focus {
     margin-right: 0.25rem;
     border-radius: 3px;
     background: var(--zen-border-subtle);
-    color: var(--zen-color-light);
-}
-
-.badge.python {
     color: var(--zen-color-mid);
-}
-
-.badge.devops {
-    color: hsl(207deg 45% 35%);
 }
 
 /* -------------------------------------------------
@@ -554,6 +549,7 @@ section:hover .anchor-link:hover {
         --scene-gradient-start: rgba(10, 16, 22, 0.15);
         --scene-gradient-mid: rgba(10, 16, 22, 0.35);
         --scene-gradient-end: rgba(10, 16, 22, 0.50);
+        --zen-codelist-bg: hsl(207deg 30% 10%);
     }
 }
 
@@ -572,6 +568,7 @@ html[data-theme="dark"] {
     --scene-gradient-start: rgba(10, 16, 22, 0.15);
     --scene-gradient-mid: rgba(10, 16, 22, 0.35);
     --scene-gradient-end: rgba(10, 16, 22, 0.50);
+    --zen-codelist-bg: hsl(207deg 30% 10%);
 }
 
 /* -------------------------------------------------
