@@ -1,42 +1,52 @@
 {{ define "main" }}
 <main>
-    <header>
-        <h1>{{ .Site.Data.zen.meta.title }}</h1>
-    </header>
+    <!-- Hero: title + concise code-block list -->
+    <div class="zen-panel zen-hero">
+        <header>
+            <h1><a href="{{ .RelPermalink }}" class="title-link">{{ .Site.Data.zen.meta.title }}</a></h1>
+        </header>
 
-    <!-- Concise list -->
-    <ol>
-        {{ range .Site.Data.zen.items }}
-        {{ if .devops }}
-        <li>
-            <a href="#{{ .id }}">{{ .title }}</a>
-        </li>
-        {{ end }}
-        {{ end }}
-    </ol>
+        <div class="zen-codelist">
+            <div class="zen-import">
+                <span class="keyword">from</span> <span class="module">devops</span> <span class="keyword">import</span> <span class="module">zen</span>
+            </div>
+            <ol>
+                {{ range .Site.Data.zen.items }}
+                {{ if .devops }}
+                <li>
+                    <a href="#{{ .id }}">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ol>
+        </div>
+    </div>
 
     <!-- Detailed explanations -->
-    {{ range .Site.Data.zen.items }}
-    {{ if .devops }}
-    <section id="{{ .id }}">
-        <h2>{{ .title }}</h2>
-
-        {{ if .python }}
-        <span class="badge python">Python</span>
-        {{ end }}
+    <div class="zen-panel zen-details">
+        {{ range .Site.Data.zen.items }}
         {{ if .devops }}
-        <span class="badge devops">DevOps</span>
+        <section id="{{ .id }}">
+            <h2>
+                {{ .title }}
+                <a href="#{{ .id }}" class="anchor-link" aria-label="Link to this section">#</a>
+            </h2>
+
+            {{ if .python }}
+            <span class="badge python">Python</span>
+            {{ end }}
+            {{ if .devops }}
+            <span class="badge devops">DevOps</span>
+            {{ end }}
+
+            <p>{{ .description | markdownify }}</p>
+        </section>
+        {{ end }}
         {{ end }}
 
-        <p>{{ .description | markdownify }}</p>
-    </section>
-    {{ end }}
-    {{ end }}
+        {{ partial "footer.html" . }}
+    </div>
 
-    <section>
-        <p>The Zen of DevOps. Inspired by <a href="https://peps.python.org/pep-0020/">The Zen of Python</a>. Additional
-            <a href="/about/">info</a>.
-        </p>
-    </section>
+    <a href="#" class="back-to-top" aria-label="Back to top">&uarr;</a>
 </main>
 {{ end }}

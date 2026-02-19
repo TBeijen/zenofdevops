@@ -1,12 +1,13 @@
 meta:
   title: "The Zen of DevOps"
+  description: "DevOps principles inspired by the Zen of Python. A small set of guidelines that value clarity, restraint, maintainability and reliability."
 items:
   - id: break-non-prod
     title: Be able to break non-production systems
     python: false
     devops: true
     description: |
-      Non-production environments enable safe experimentation, speeding up delivery.
+      Non-production environments are needed for safe experimentation and fast delivery.
 
       Any challenge identified and resolved in non-production is one less risk to worry about on production.
 
@@ -17,7 +18,7 @@ items:
     description: |
       Non-production environments must be representative enough to catch issues.
 
-      Testing and observability needs to be sufficient to catch issues.
+      Testing and observability need to be sufficient to catch issues.
 
       Isolation and guardrails should prevent accidentally breaking production.
 
@@ -45,9 +46,9 @@ items:
     description: |
       Hidden dependencies often only appear during disaster recovery or scaling.
       
-      More than once, allows upgrades to be repeatedly tested.
+      More than once allows upgrades to be repeatedly tested.
 
-      Embed rebuilding and repetition into automated processes, to identify fragility points before they turn into technical debt.
+      Embed rebuilding and repetition into automated processes. This helps identify fragility points before they turn into technical debt.
 
   - id: fast-over-slow
     title: Favor changes that make you faster over those that slow you down
@@ -100,7 +101,7 @@ items:
 
       Address essential complexity, while keeping accidental complexity to a minimum.
 
-      Avoid ignoring essential complexity by artificial simplicity.
+      Avoid masking essential complexity with artificial simplicity.
 
   - id: flat-nested
     title: Flat is better than nested
@@ -134,7 +135,7 @@ items:
     description: |
       Make errors something that can be observed, diagnosed, and addressed.
 
-      If something unexpected is encountered, do not ignore it.
+      If something unexpected is encountered, don't ignore it.
 
       Blameless culture and post-mortems help turn errors into learning opportunities.
 
@@ -152,11 +153,11 @@ items:
     python: true
     devops: true
     description: |
-      If guessing for the cause of a problem, try to reproduce and find the root cause.
+      If guessing at the cause of a problem, try to reproduce and find the root cause.
 
-      If guessing for the purpose of a component or piece of configuration, improve the design or documentation.
+      If guessing at the purpose of a component or piece of configuration, improve the design or documentation.
 
-      If guessing what the effect of a change will be, seek ways to remove the guessing, not relying on luck.
+      If guessing what the effect of a change will be, seek ways to remove the guessing. Don't rely on luck.
 
       Become a fire-preventer instead of a fire-fighter.
 
@@ -165,11 +166,11 @@ items:
     python: true
     devops: true
     description: |
-      Multiple approaches lead to fragmentation, confusion and cognitive load. 
+      Multiple approaches lead to fragmentation, confusion and cognitive load.
 
       Limit options through clear design, documentation, and standardized examples.
 
-      Follow common patterns and conventions, to make it easier for others to understand and contribute.
+      Follow common patterns and conventions to make it easier for others to understand and contribute.
 
   - id: may-not-obvious
     title: Although that way may not be obvious at first unless you're Dutch
@@ -191,7 +192,7 @@ items:
     python: true
     devops: true
     description: |
-      If a design is difficult to explain, it is likely flawed. 
+      If a design is difficult to explain, it is likely flawed.
 
       If the need for a design is difficult to explain, it might not be needed at all.
 

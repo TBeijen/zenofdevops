@@ -1,3 +1,4 @@
+baseURL = "https://www.zenofdevops.org"
 disableKinds = ["taxonomy", "term"]
 
 [outputs]

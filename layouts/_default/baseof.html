@@ -3,16 +3,75 @@
 
 <head>
     <meta charset="utf-8">
+
+    {{/* --- Title --- */}}
+    {{ if .IsHome }}
     <title>{{ .Site.Data.zen.meta.title }}</title>
+    {{ else }}
+    <title>{{ .Title }} - {{ .Site.Data.zen.meta.title }}</title>
+    {{ end }}
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{/* --- Meta description --- */}}
+    {{ $description := .Site.Data.zen.meta.description }}
+    {{ with .Description }}{{ $description = . }}{{ end }}
+    <meta name="description" content="{{ $description }}">
+
+    {{/* --- Canonical URL --- */}}
+    <link rel="canonical" href="{{ .Permalink }}">
+
+    {{/* --- CSS --- */}}
     {{ $css := resources.Get "css/main.css" | resources.Minify }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+    {{/* --- Background image --- */}}
+    {{ $bg := resources.Get "images/bg-lake-sunrise-gemini.png" }}
+    {{ $bgOptimized := $bg.Process "jpg q85" }}
+    <link rel="preload" as="image" href="{{ $bgOptimized.RelPermalink }}">
+
+    {{/* --- OG image (dedicated 1200x630 header) --- */}}
+    {{ $ogSrc := resources.Get "images/header-wide-1200x630.png" }}
+    {{ $ogImage := $ogSrc.Process "jpg q90" }}
+
+    {{/* --- Open Graph --- */}}
+    <meta property="og:site_name" content="{{ .Site.Data.zen.meta.title }}">
+    {{ if .IsHome }}
+    <meta property="og:title" content="{{ .Site.Data.zen.meta.title }}">
+    {{ else }}
+    <meta property="og:title" content="{{ .Title }}">
+    {{ end }}
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:type" content="{{ cond .IsHome "website" "article" }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ $ogImage.Permalink }}">
+
+    {{/* --- Twitter Card --- */}}
+    <meta name="twitter:card" content="summary_large_image">
+    {{ if .IsHome }}
+    <meta name="twitter:title" content="{{ .Site.Data.zen.meta.title }}">
+    {{ else }}
+    <meta name="twitter:title" content="{{ .Title }}">
+    {{ end }}
+    <meta name="twitter:description" content="{{ $description }}">
+    <meta name="twitter:image" content="{{ $ogImage.Permalink }}">
+
+    {{/* --- Favicons --- */}}
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
+    <div class="bg-scene" style="background-image: url('{{ $bgOptimized.RelPermalink }}');"></div>
+
     {{ block "main" . }}{{ end }}
 
+    {{ with resources.Get "js/parallax.js" }}
+    <script src="{{ .RelPermalink }}"></script>
+    {{ end }}
     {{ with resources.Get "js/theme.js" }}
     <script src="{{ .RelPermalink }}"></script>
     {{ end }}

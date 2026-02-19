@@ -1,0 +1,354 @@
+:root {
+  /* default theme color */
+  /* can be overrided by uses `themeConfig` option */
+  --slidev-theme-primary: #5d8392;
+
+  /* zen tokens */
+  --zen-accent: var(--slidev-theme-primary);
+  --zen-color-light: hsl(221, 17%, 54%);
+  --zen-color-mid: hsl(221, 17%, 44%);
+  --zen-color-dark: hsl(221, 17%, 34%);
+  --zen-color-black: hsl(221, 17%, 20%);
+  --zen-titlebar-opacity: 0.38;
+  --zen-panel-bg: rgba(255, 255, 255, 0.84);
+  --zen-panel-bg-opaque: rgba(255, 255, 255, 0.24);
+  --zen-panel-radius: 4px;
+  --zen-panel-padding-x: 44px;
+  --zen-panel-padding-y: 34px;
+  --zen-panel-max-w: 1600px;
+  --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+  --zen-bg-blur: 6px;
+  --zen-bg-saturate: 1.08;
+  --zen-bg-dim: 0.82;
+  --zen-panel-fade-start-pos: 78%;
+  --zen-panel-fade-end-opacity: 0.4;
+  --zen-titlebar-min-height: 56px;
+  --zen-frame-gutter: 22px;
+  /* --zen-title-gutter: 22px; */
+  --zen-title-content-gap: 10px;
+  --zen-bottom-gutter: 6px;
+}
+
+.slidev-layout {
+  /* padding-left: var(--zen-frame-gutter);
+  padding-right: var(--zen-frame-gutter); */
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0rem;
+  color: var(--zen-color-black);
+}
+
+.slidev-layout.cover,
+.slidev-layout.intro {
+  @apply h-full grid;
+
+  h1 {
+    @apply text-6xl leading-20;
+  }
+
+  h1+p {
+    @apply -mt-2 opacity-50 mb-4;
+  }
+
+  p+h2,
+  ul+h2,
+  table+h2 {
+    @apply mt-10;
+  }
+}
+
+/* --------------------
+   Zen Main Layout Frame
+   -------------------- */
+
+.zen-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  background: #0b0f12;
+
+  /* default in case no slide frontmatter sets it */
+  --zen-bg-image: none;
+}
+
+.zen-slide::before {
+  content: '';
+  position: absolute;
+  inset: -26px;
+  background-image:
+    var(--zen-bg-image),
+    radial-gradient(1100px 650px at 60% 30%, rgba(255, 255, 255, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(8, 12, 16, 0.65), rgba(8, 12, 16, 0.88));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(var(--zen-bg-blur)) saturate(var(--zen-bg-saturate)) brightness(var(--zen-bg-dim));
+  transform: scale(1.06);
+  z-index: 0;
+}
+
+.zen-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 640px at 65% 30%, rgba(255, 255, 255, 0.14), transparent 62%),
+    linear-gradient(180deg, rgba(10, 16, 22, 0.18), rgba(10, 16, 22, 0.34));
+}
+
+.zen-shell {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 0;
+  padding: var(--zen-frame-gutter);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.zen-slide[data-zen-has-title='true'] .zen-shell {
+  padding-top: var(--zen-title-content-gap);
+  padding-bottom: calc(var(--zen-frame-gutter) + var(--zen-bottom-gutter));
+}
+
+.zen-titlebar {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  margin-left: var(--zen-frame-gutter);
+  margin-right: var(--zen-frame-gutter);
+
+  min-height: var(--zen-titlebar-min-height);
+  display: flex;
+  align-items: center;
+  padding: 10px 26px;
+  background: color-mix(in srgb, var(--zen-color-light) calc(var(--zen-titlebar-opacity) * 100%), transparent);
+  color: #fff;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(10px);
+  border-bottom-left-radius: var(--zen-panel-radius);
+  border-bottom-right-radius: var(--zen-panel-radius);
+}
+
+/* Layout-specific defaults */
+
+.zen-cover {
+  --zen-bg-blur: 0px;
+}
+
+.zen-cover .zen-shell {
+  display: grid;
+  place-items: center;
+  padding-top: var(--zen-frame-gutter);
+}
+
+.zen-top-title {
+  /* tighter frame + less gap below titlebar */
+  --zen-frame-gutter: 14px;
+  --zen-title-content-gap: 6px;
+
+  /* make the panel edges align with the title bar */
+  --zen-panel-max-w: 100%;
+}
+
+.zen-title :is(h1, h2, h3) {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.zen-title p {
+  margin: 0;
+  opacity: 0.92;
+}
+
+.zen-title.is-center {
+  text-align: center;
+}
+
+.zen-panel {
+  max-width: var(--zen-panel-max-w);
+  width: 100%;
+  justify-self: center;
+  align-self: start;
+
+  flex: 1;
+  min-height: 0;
+
+  background: var(--zen-panel-bg);
+  border-radius: var(--zen-panel-radius);
+  padding: var(--zen-panel-padding-y) var(--zen-panel-padding-x);
+  box-shadow: var(--zen-panel-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  /* nice if supported; harmless if not */
+  backdrop-filter: blur(10px);
+
+  /* fade everything at the bottom (text+images) */
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) var(--zen-panel-fade-start-pos),
+      rgba(0, 0, 0, var(--zen-panel-fade-end-opacity)) 100%);
+  mask-image: linear-gradient(180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) var(--zen-panel-fade-start-pos),
+      rgba(0, 0, 0, var(--zen-panel-fade-end-opacity)) 100%);
+}
+
+.zen-cover .zen-panel {
+  background: var(--zen-panel-bg-opaque);
+}
+
+.zen-panel :is(h1, h2, h3) {
+  color: var(--zen-color-mid);
+}
+
+.zen-panel a {
+  color: var(--zen-color-mid);
+}
+
+.zen-panel :is(ul, ol) {
+  padding-left: 1.2em;
+}
+
+.zen-panel :is(ul, ol)>li::marker {
+  color: var(--zen-color-light);
+}
+
+.zen-panel :is(ul)>li {
+  list-style-type: disc;
+}
+
+.zen-panel blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 6px 16px;
+  border-left: 4px solid var(--zen-color-mid);
+  background: white;
+  /* background: color-mix(in srgb, var(--zen-color-light) 15%, transparent); */
+}
+
+.zen-panel--center {
+  align-self: center;
+  justify-self: center;
+}
+
+.zen-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.zen-col> :first-child {
+  margin-top: 0;
+}
+
+.zen-side-title {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.85fr) minmax(0, 1.15fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.zen-slide[data-zen-side='right'] .zen-side-title {
+  grid-template-columns: minmax(0, 1.15fr) minmax(200px, 0.85fr);
+}
+
+.zen-side-title__title :is(h1, h2, h3) {
+  margin-top: 0;
+}
+
+/* --------------------
+   Accent presets
+   -------------------- */
+
+.zen-slide[data-zen-color='ice'] {
+  --zen-color-light: hsl(207deg 37% 42%);
+  --zen-color-mid: hsl(207deg 37% 32%);
+  --zen-color-dark: hsl(207deg 37% 22%);
+  --zen-color-black: hsl(207deg 37% 16%);
+}
+
+.zen-slide[data-zen-color='sand'] {
+  --zen-color-light: hsl(44, 33%, 44%);
+  --zen-color-mid: hsl(44, 33%, 34%);
+  --zen-color-dark: hsl(44, 33%, 24%);
+  --zen-color-black: hsl(44, 33%, 20%);
+}
+
+.zen-slide[data-zen-color='grass'] {
+  --zen-color-light: hsl(93deg 37% 22%);
+  --zen-color-mid: hsl(93deg 37% 15%);
+  --zen-color-dark: hsl(93deg 37% 8%);
+  --zen-color-black: hsl(93deg 37% 4%);
+}
+
+.zen-slide[data-zen-color='rouge'] {
+  --zen-color-light: hsl(19deg 35% 40%);
+  --zen-color-mid: hsl(19deg 35% 30%);
+  --zen-color-dark: hsl(19deg 35% 20%);
+  --zen-color-black: hsl(19deg 35% 10%);
+}
+
+.zen-slide[data-zen-color='purple'] {
+  --zen-color-light: hsl(332deg 14% 43%);
+  --zen-color-mid: hsl(332deg 14% 33%);
+  --zen-color-dark: hsl(332deg 14% 23%);
+  --zen-color-black: hsl(332deg 14% 15%);
+}
+
+/* --------------------
+   Small compat helpers
+   -------------------- */
+
+.font-size-3 {
+  font-size: 0.9rem;
+}
+
+a.ns-c-iconlink {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .zen-shell {
+    --zen-frame-gutter: 14px;
+    padding: var(--zen-frame-gutter);
+  }
+
+  .zen-slide[data-zen-has-title='true'] .zen-shell {
+    padding-top: var(--zen-title-content-gap);
+    padding-bottom: var(--zen-frame-gutter);
+  }
+
+  .zen-panel {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .zen-two-cols {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .zen-side-title,
+  .zen-slide[data-zen-side='right'] .zen-side-title {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+
+.zen-code-small .slidev-code {
+  font-size: 8px !important;
+  line-height: 10px !important;
+}

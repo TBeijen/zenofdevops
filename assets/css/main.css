@@ -1,24 +1,34 @@
 /* -------------------------------------------------
    Zen of DevOps
-   Single-domain, system-font, dark-first CSS
-   Palette derived from tbnl screen.css
+   Ice palette, scenic background, panel layout
+   Inspired by slidev-theme-zen (ice accent)
    ------------------------------------------------- */
 
 :root {
-    /* Colors */
-    --bg: #0c161d;
-    --fg: #e6eef4;
-    --fg-muted: #9aa6ad;
+    /* Ice palette (from slidev-theme-zen) */
+    --zen-color-light: hsl(207deg 37% 42%);
+    --zen-color-mid: hsl(207deg 37% 32%);
+    --zen-color-dark: hsl(207deg 37% 22%);
+    --zen-color-black: hsl(207deg 37% 16%);
 
-    --heading: #679ec2;
-    --link: #ba91aa;
-    --link-hover: #679ec2;
+    /* Panel */
+    --zen-panel-bg: rgba(255, 255, 255, 0.80);
+    --zen-panel-radius: 6px;
+    --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+    --zen-panel-padding-x: clamp(1.25rem, 4vw, 2.75rem);
+    --zen-panel-padding-y: clamp(1.5rem, 3vw, 2.5rem);
+    --zen-bg-blur: 10px;
 
-    --border: #1b3141;
+    /* Scene */
+    --scene-bg: #0b0f12;
+    --scene-blur: 0px;
+    /* set to 0px to disable bg blur */
 
     /* Typography */
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro",
+        Menlo, Consolas, "DejaVu Sans Mono", monospace;
 
     --line-height: 1.65;
 }
@@ -34,8 +44,8 @@
 }
 
 html {
-    background: var(--bg);
-    color: var(--fg);
+    background: var(--scene-bg);
+    color: var(--zen-color-black);
     font-family: var(--font-sans);
     line-height: var(--line-height);
 }
@@ -43,6 +53,44 @@ html {
 body {
     margin: 0;
     padding: 2rem 1.25rem;
+    min-height: 100vh;
+}
+
+/* -------------------------------------------------
+   Background Scene
+   ------------------------------------------------- */
+
+.bg-scene {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 0;
+
+    /*
+     * Oversized: 140vh tall so ~40vh hangs below the viewport.
+     * JS shifts it upward on scroll via translateY.
+     * Without JS it just sits at top:0 showing the upper portion.
+     */
+    top: 0;
+    height: 140vh;
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    will-change: transform;
+    filter: blur(var(--scene-blur));
+}
+
+.bg-scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(10, 16, 22, 0.05) 0%,
+            rgba(10, 16, 22, 0.15) 50%,
+            rgba(10, 16, 22, 0.25) 100%);
 }
 
 /* -------------------------------------------------
@@ -50,8 +98,36 @@ body {
    ------------------------------------------------- */
 
 main {
+    position: relative;
+    z-index: 1;
     max-width: 48rem;
     margin: 0 auto;
+}
+
+/* -------------------------------------------------
+   Panel
+   ------------------------------------------------- */
+
+.zen-panel {
+    background: var(--zen-panel-bg);
+    border-radius: var(--zen-panel-radius);
+    padding: var(--zen-panel-padding-y) var(--zen-panel-padding-x);
+    box-shadow: var(--zen-panel-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(var(--zen-bg-blur)) saturate(1.08);
+    -webkit-backdrop-filter: blur(var(--zen-bg-blur)) saturate(1.08);
+}
+
+.zen-hero {
+    margin-bottom: 2rem;
+}
+
+.zen-details {
+    margin-bottom: 2rem;
+}
+
+.zen-page {
+    margin-bottom: 2rem;
 }
 
 /* -------------------------------------------------
@@ -61,14 +137,27 @@ main {
 h1,
 h2,
 h3 {
-    color: var(--heading);
+    color: var(--zen-color-mid);
     font-weight: 500;
     line-height: 1.25;
 }
 
 h1 {
     font-size: 2rem;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.25rem;
+}
+
+/* Title link: inherits heading color, no underline */
+.title-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.title-link:hover,
+.title-link:focus {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
 }
 
 h2 {
@@ -86,33 +175,111 @@ h3 {
    ------------------------------------------------- */
 
 p {
-    margin: 0.5rem 0 0;
+    margin: 0.75rem 0;
+    color: var(--zen-color-black);
 }
 
 .muted,
 small {
-    color: var(--fg-muted);
+    color: var(--zen-color-light);
 }
 
 /* -------------------------------------------------
-   Lists
+   Blockquotes
    ------------------------------------------------- */
 
-ol {
-    margin: 0 0 2rem;
-    padding-left: 1.25rem;
+blockquote {
+    margin: 1.25rem 0;
+    padding: 0.75rem 1.25rem;
+    border-left: 3px solid var(--zen-color-mid);
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 0 4px 4px 0;
 }
 
-ol li {
-    margin: 0.4rem 0;
+blockquote p {
+    margin: 0;
+    color: var(--zen-color-light);
+    font-style: italic;
 }
 
 /* -------------------------------------------------
-   Sections
+   Code-block list (zen items as code)
+   ------------------------------------------------- */
+
+.zen-codelist {
+    background: var(--zen-color-black);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+}
+
+.zen-codelist ol {
+    margin: 0;
+    padding-left: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    list-style-type: decimal;
+}
+
+.zen-import {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    padding-left: 1.75rem;
+    margin-bottom: 1.8em;
+    position: relative;
+}
+
+.zen-import::before {
+    content: ">>>";
+    position: absolute;
+    left: 0;
+    width: 1.75rem;
+    box-sizing: border-box;
+    padding-right: 0.35rem;
+    text-align: right;
+    color: hsl(207deg 20% 40%);
+}
+
+.zen-import .keyword {
+    color: hsl(207deg 40% 75%);
+}
+
+.zen-import .module {
+    color: hsl(207deg 50% 88%);
+}
+
+.zen-codelist ol li {
+    margin: 0;
+    color: hsl(207deg 30% 65%);
+}
+
+.zen-codelist ol li::marker {
+    color: hsl(207deg 20% 40%);
+}
+
+.zen-codelist ol li a {
+    color: hsl(207deg 40% 75%);
+    text-decoration: none;
+}
+
+.zen-codelist ol li a:hover,
+.zen-codelist ol li a:focus {
+    color: hsl(207deg 50% 88%);
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------
+   Sections (detail items)
    ------------------------------------------------- */
 
 section {
     padding-top: 0.5rem;
+}
+
+section+section {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* -------------------------------------------------
@@ -120,13 +287,13 @@ section {
    ------------------------------------------------- */
 
 a {
-    color: var(--link);
+    color: var(--zen-color-mid);
     text-decoration: none;
 }
 
 a:hover,
 a:focus {
-    color: var(--link-hover);
+    color: var(--zen-color-dark);
     text-decoration: underline;
 }
 
@@ -140,16 +307,83 @@ a:focus {
     padding: 0.15rem 0.4rem;
     margin-right: 0.25rem;
     border-radius: 3px;
-    background: var(--border);
-    color: var(--fg-muted);
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--zen-color-light);
 }
 
 .badge.python {
-    color: var(--heading);
+    color: var(--zen-color-mid);
 }
 
 .badge.devops {
-    color: var(--link);
+    color: hsl(207deg 45% 35%);
+}
+
+/* -------------------------------------------------
+   Back link (non-homepage navigation)
+   ------------------------------------------------- */
+
+.back-link {
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.back-link a {
+    color: var(--zen-color-mid);
+    text-decoration: none;
+}
+
+.back-link a:hover,
+.back-link a:focus {
+    color: var(--zen-color-dark);
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------
+   Footer section
+   ------------------------------------------------- */
+
+.zen-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    opacity: 0.7;
+}
+
+.zen-footer hr {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.zen-footer nav a,
+.zen-footer-credit,
+.zen-footer-credit a {
+    color: var(--zen-color-light);
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.zen-footer nav a:hover,
+.zen-footer nav a:focus,
+.zen-footer-credit a:hover,
+.zen-footer-credit a:focus {
+    color: var(--zen-color-mid);
+    text-decoration: underline;
+}
+
+.zen-footer nav a.active {
+    color: var(--zen-color-mid);
+    pointer-events: none;
+}
+
+.zen-footer nav a+a::before {
+    content: "\00b7";
+    margin: 0 0.5em;
+    color: var(--zen-color-light);
+    text-decoration: none;
+    display: inline-block;
 }
 
 /* -------------------------------------------------
@@ -158,8 +392,128 @@ a:focus {
 
 hr {
     border: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
     margin: 3rem 0;
+}
+
+/* -------------------------------------------------
+   Anchor links (paragraph icons)
+   ------------------------------------------------- */
+
+.anchor-link {
+    margin-left: 0.4em;
+    font-size: 0.85em;
+    font-weight: 400;
+    color: var(--zen-color-light);
+    opacity: 0.35;
+    text-decoration: none;
+    position: relative;
+    transition: opacity 0.2s ease;
+}
+
+.anchor-link:hover,
+.anchor-link:focus {
+    opacity: 1;
+    color: var(--zen-color-mid);
+    text-decoration: none;
+}
+
+/* On section hover, reveal the anchor more */
+section:hover .anchor-link {
+    opacity: 0.6;
+}
+
+section:hover .anchor-link:hover {
+    opacity: 1;
+}
+
+/* "Copied!" tooltip */
+.anchor-link.copied::after {
+    content: 'Copied!';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #fff;
+    background: var(--zen-color-dark);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: tooltip-fade 2s ease forwards;
+}
+
+@keyframes tooltip-fade {
+    0% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* -------------------------------------------------
+   Back to top
+   ------------------------------------------------- */
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    /* Center of button aligns with right edge of dark code-block panel */
+    right: calc(50% - 24rem + var(--zen-panel-padding-x) - 1.25rem);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+
+    background: var(--zen-panel-bg);
+    backdrop-filter: blur(var(--zen-bg-blur));
+    -webkit-backdrop-filter: blur(var(--zen-bg-blur));
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+    color: var(--zen-color-mid);
+    font-size: 1.1rem;
+    text-decoration: none;
+    line-height: 1;
+
+    /* Hidden by default — JS adds .visible */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(0.5rem);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+    color: var(--zen-color-dark);
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* On smaller screens, position from right edge instead */
+@media (max-width: 52rem) {
+    .back-to-top {
+        right: 1.5rem;
+    }
 }
 
 /* -------------------------------------------------
@@ -167,6 +521,38 @@ hr {
    ------------------------------------------------- */
 
 ::selection {
-    background: var(--link);
-    color: var(--bg);
+    background: var(--zen-color-mid);
+    color: #fff;
+}
+
+/* -------------------------------------------------
+   Responsive
+   ------------------------------------------------- */
+
+@media (max-width: 640px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+
+    .zen-codelist {
+        padding: 0.75rem 0.75rem;
+    }
+
+    .zen-codelist ol {
+        font-size: 0.75rem;
+        padding-left: 1.5rem;
+    }
+
+    .zen-import {
+        font-size: 0.75rem;
+        padding-left: 1.5rem;
+    }
+
+    .zen-import::before {
+        width: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
 }
