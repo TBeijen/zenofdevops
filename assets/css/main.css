@@ -17,12 +17,24 @@
     --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
     --zen-panel-padding-x: clamp(1.25rem, 4vw, 2.75rem);
     --zen-panel-padding-y: clamp(1.5rem, 3vw, 2.5rem);
+    --zen-panel-border: rgba(255, 255, 255, 0.45);
     --zen-bg-blur: 10px;
+
+    /* Codelist */
+    --zen-codelist-bg: hsl(207deg 37% 16%);
+
+    /* Borders & overlays */
+    --zen-overlay-subtle: rgba(0, 0, 0, 0.03);
+    --zen-border-subtle: rgba(0, 0, 0, 0.06);
+    --zen-border-hr: rgba(0, 0, 0, 0.08);
 
     /* Scene */
     --scene-bg: #0b0f12;
     --scene-blur: 0px;
     /* set to 0px to disable bg blur */
+    --scene-gradient-start: rgba(10, 16, 22, 0);
+    --scene-gradient-mid: rgba(10, 16, 22, 0.15);
+    --scene-gradient-end: rgba(10, 16, 22, 0.25);
 
     /* Typography */
     --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
@@ -82,15 +94,19 @@ body {
     filter: blur(var(--scene-blur));
 }
 
+/* Default: light visible, dark hidden */
+.bg-scene-light { opacity: 1; }
+.bg-scene-dark  { opacity: 0; }
+
 .bg-scene::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
         linear-gradient(180deg,
-            rgba(10, 16, 22, 0.05) 0%,
-            rgba(10, 16, 22, 0.15) 50%,
-            rgba(10, 16, 22, 0.25) 100%);
+            var(--scene-gradient-start) 0%,
+            var(--scene-gradient-mid) 50%,
+            var(--scene-gradient-end) 100%);
 }
 
 /* -------------------------------------------------
@@ -113,7 +129,7 @@ main {
     border-radius: var(--zen-panel-radius);
     padding: var(--zen-panel-padding-y) var(--zen-panel-padding-x);
     box-shadow: var(--zen-panel-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    border: 1px solid var(--zen-panel-border);
     backdrop-filter: blur(var(--zen-bg-blur)) saturate(1.08);
     -webkit-backdrop-filter: blur(var(--zen-bg-blur)) saturate(1.08);
 }
@@ -144,7 +160,14 @@ h3 {
 
 h1 {
     font-size: 2rem;
-    margin: 0 0 1.25rem;
+    margin: 0;
+}
+
+.page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
 }
 
 /* Title link: inherits heading color, no underline */
@@ -192,7 +215,7 @@ blockquote {
     margin: 1.25rem 0;
     padding: 0.75rem 1.25rem;
     border-left: 3px solid var(--zen-color-mid);
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--zen-overlay-subtle);
     border-radius: 0 4px 4px 0;
 }
 
@@ -207,7 +230,7 @@ blockquote p {
    ------------------------------------------------- */
 
 .zen-codelist {
-    background: var(--zen-color-black);
+    background: var(--zen-codelist-bg);
     border-radius: 4px;
     padding: 1rem 1.25rem;
     overflow-x: auto;
@@ -279,7 +302,7 @@ section {
 }
 
 section+section {
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid var(--zen-border-subtle);
 }
 
 /* -------------------------------------------------
@@ -307,16 +330,8 @@ a:focus {
     padding: 0.15rem 0.4rem;
     margin-right: 0.25rem;
     border-radius: 3px;
-    background: rgba(0, 0, 0, 0.06);
-    color: var(--zen-color-light);
-}
-
-.badge.python {
+    background: var(--zen-border-subtle);
     color: var(--zen-color-mid);
-}
-
-.badge.devops {
-    color: hsl(207deg 45% 35%);
 }
 
 /* -------------------------------------------------
@@ -392,7 +407,7 @@ a:focus {
 
 hr {
     border: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid var(--zen-border-hr);
     margin: 3rem 0;
 }
 
@@ -523,6 +538,78 @@ section:hover .anchor-link:hover {
 ::selection {
     background: var(--zen-color-mid);
     color: #fff;
+}
+
+/* -------------------------------------------------
+   Dark mode
+   ------------------------------------------------- */
+
+/* Auto: follows OS preference, unless user explicitly chose light */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+        --zen-color-light: hsl(207deg 30% 65%);
+        --zen-color-mid: hsl(207deg 37% 60%);
+        --zen-color-dark: hsl(207deg 37% 72%);
+        --zen-color-black: hsl(207deg 20% 85%);
+        --zen-panel-bg: rgba(20, 35, 50, 0.90);
+        --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+        --zen-panel-border: rgba(255, 255, 255, 0.08);
+        --zen-overlay-subtle: rgba(255, 255, 255, 0.04);
+        --zen-border-subtle: rgba(255, 255, 255, 0.08);
+        --zen-border-hr: rgba(255, 255, 255, 0.10);
+        --scene-gradient-start: rgba(10, 16, 22, 0);
+        --scene-gradient-mid: rgba(10, 16, 22, 0.15);
+        --scene-gradient-end: rgba(10, 16, 22, 0.25);
+        --zen-codelist-bg: hsl(207deg 30% 10%);
+    }
+
+    html:not([data-theme="light"]) .bg-scene-light { opacity: 0 !important; }
+    html:not([data-theme="light"]) .bg-scene-dark  { opacity: 1 !important; }
+}
+
+/* Explicit: user chose dark via toggle */
+html[data-theme="dark"] {
+    --zen-color-light: hsl(207deg 30% 65%);
+    --zen-color-mid: hsl(207deg 37% 60%);
+    --zen-color-dark: hsl(207deg 37% 72%);
+    --zen-color-black: hsl(207deg 20% 85%);
+    --zen-panel-bg: rgba(20, 35, 50, 0.90);
+    --zen-panel-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+    --zen-panel-border: rgba(255, 255, 255, 0.08);
+    --zen-overlay-subtle: rgba(255, 255, 255, 0.04);
+    --zen-border-subtle: rgba(255, 255, 255, 0.08);
+    --zen-border-hr: rgba(255, 255, 255, 0.10);
+    --scene-gradient-start: rgba(10, 16, 22, 0);
+    --scene-gradient-mid: rgba(10, 16, 22, 0.15);
+    --scene-gradient-end: rgba(10, 16, 22, 0.25);
+    --zen-codelist-bg: hsl(207deg 30% 10%);
+}
+
+html[data-theme="dark"] .bg-scene-light { opacity: 0 !important; }
+html[data-theme="dark"] .bg-scene-dark  { opacity: 1 !important; }
+
+/* -------------------------------------------------
+   Theme toggle
+   ------------------------------------------------- */
+
+.theme-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--zen-color-light);
+    font-size: 1.15rem;
+    font-family: inherit;
+    line-height: 1;
+}
+
+.theme-toggle:hover {
+    color: var(--zen-color-mid);
+}
+
+html.js-enabled .theme-toggle {
+    display: inline;
 }
 
 /* -------------------------------------------------

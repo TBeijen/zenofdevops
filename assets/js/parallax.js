@@ -16,12 +16,12 @@
      Parallax
      ------------------------------------------------- */
 
-  var scene = document.querySelector('.bg-scene')
-  if (scene) {
+  var scenes = document.querySelectorAll('.bg-scene')
+  if (scenes.length) {
     var ticking = false
 
     function getMaxShift() {
-      return scene.offsetHeight - window.innerHeight
+      return scenes[0].offsetHeight - window.innerHeight
     }
 
     function updateParallax() {
@@ -37,7 +37,10 @@
       var progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0
       var shift = progress * maxShift
 
-      scene.style.transform = 'translateY(' + (-shift) + 'px)'
+      var transform = 'translateY(' + (-shift) + 'px)'
+      for (var i = 0; i < scenes.length; i++) {
+        scenes[i].style.transform = transform
+      }
     }
 
     window.addEventListener('scroll', function () {
