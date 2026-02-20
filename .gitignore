@@ -24,3 +24,4 @@ hugo.linux
 # Temp local files
 OUTLINE.md
 RESOURCES.md
+.temp/
