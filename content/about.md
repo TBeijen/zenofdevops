@@ -12,13 +12,13 @@ Based on the [Zen of Python](https://peps.python.org/pep-0020/), it aims to prov
 
 > Don't let guidelines distract you from your goals!
 
-One does not fail the Zen of DevOps when not being able to easily run multiple versions of an application.
+You don't fail the Zen of DevOps when not being able to easily run multiple versions of an application.
 
 A team might be performing perfectly fine, even though parts of the stack are rather ugly.
 
-Once the guidelines themselves become goals, and become the center point of debates, one tends to lose focus on what one is trying to accomplish.
+Once the guidelines themselves become goals, and become the center of debates, you tend to lose focus on what you're trying to accomplish.
 
-That being said: It's very worthwhile to unpack what the guidelines might accomplish in one's own specific context. How one could interpret the guidelines. Where they align or misalign and why that might be.
+That being said: It's worthwhile to unpack what the guidelines could accomplish in your own situation. The possible interpretations of the guidelines. Where they align or misalign and why that might be.
 
 Explore!
 

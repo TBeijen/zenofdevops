@@ -1,6 +1,6 @@
 meta:
   title: "The Zen of DevOps"
-  description: "DevOps principles inspired by the Zen of Python. A small set of guidelines that value clarity, restraint, maintainability and reliability."
+  description: "The Zen of DevOps captures a small set of principles that value clarity, restraint, maintainability and reliability."
 items:
   - id: break-non-prod
     title: Be able to break non-production systems
@@ -45,10 +45,12 @@ items:
     devops: true
     description: |
       Hidden dependencies often only appear during disaster recovery or scaling.
-      
+
       More than once allows upgrades to be repeatedly tested.
 
-      Embed rebuilding and repetition into automated processes. This helps identify fragility points before they turn into technical debt.
+      Make rebuilding a habit, not a project. Weak spots surface when repetition is cheap.
+
+      If you can't rebuild, you can't recover from disaster.
 
   - id: fast-over-slow
     title: Favor changes that make you faster over those that slow you down
