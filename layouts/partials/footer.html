@@ -2,9 +2,10 @@
     <hr>
     <nav>
         {{ if not .IsHome }}<a href="/">Home</a>{{ end }}
-        <a href="/about/"{{ if eq .RelPermalink "/about/" }} class="active"{{ end }}>About</a>
-        <a href="/legal/"{{ if eq .RelPermalink "/legal/" }} class="active"{{ end }}>Copyright &amp; Privacy</a>
+        <a href="/about/" {{ if eq .RelPermalink "/about/" }} class="active" {{ end }}>About</a>
+        <a href="/legal/" {{ if eq .RelPermalink "/legal/" }} class="active" {{ end }}>Copyright &amp; Privacy</a>
 
     </nav>
-    <span class="zen-footer-credit">by <a href="https://www.tibobeijen.nl">Tibo Beijen</a></span>
+    <span class="zen-footer-credit">by <a
+            href="https://www.tibobeijen.nl/2026/02/23/introducing-the-zen-of-devops/">Tibo Beijen</a></span>
 </footer>
