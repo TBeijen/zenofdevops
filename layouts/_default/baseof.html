@@ -17,6 +17,7 @@
     {{ $description := .Site.Data.zen.meta.description }}
     {{ with .Description }}{{ $description = . }}{{ end }}
     <meta name="description" content="{{ $description }}">
+    <meta name="keywords" content="{{ .Site.Data.zen.meta.keywords }}">
 
     {{/* --- Canonical URL --- */}}
     <link rel="canonical" href="{{ .Permalink }}">
