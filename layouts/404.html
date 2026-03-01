@@ -1,0 +1,23 @@
+{{ define "main" }}
+<main>
+    <div class="zen-panel zen-page">
+        <nav class="back-link">
+            <a href="/">&larr; Home</a>
+        </nav>
+        <header class="page-header">
+            <h1>Page not found</h1>
+            <button class="theme-toggle" aria-label="Toggle theme">&#x25D1;</button>
+        </header>
+
+        <section>
+            <blockquote>
+                There should be one — and preferably only one — obvious way to do it.
+            </blockquote>
+            <p>This was not the obvious way. The page you're looking for doesn't exist.</p>
+            <p><a href="/">Return to the Zen of DevOps</a></p>
+        </section>
+
+        {{ partial "footer.html" . }}
+    </div>
+</main>
+{{ end }}
