@@ -29,7 +29,7 @@
     --zen-border-hr: rgba(0, 0, 0, 0.08);
 
     /* Scene */
-    --scene-bg: #0b0f12;
+    --scene-bg: #748b9a;
     --scene-blur: 0px;
     /* set to 0px to disable bg blur */
     --scene-gradient-start: rgba(10, 16, 22, 0);
@@ -560,6 +560,7 @@ section:hover .anchor-link:hover {
         --scene-gradient-start: rgba(10, 16, 22, 0);
         --scene-gradient-mid: rgba(10, 16, 22, 0.15);
         --scene-gradient-end: rgba(10, 16, 22, 0.25);
+        --scene-bg: #0b0f12;
         --zen-codelist-bg: hsl(207deg 30% 10%);
     }
 
@@ -582,6 +583,7 @@ html[data-theme="dark"] {
     --scene-gradient-start: rgba(10, 16, 22, 0);
     --scene-gradient-mid: rgba(10, 16, 22, 0.15);
     --scene-gradient-end: rgba(10, 16, 22, 0.25);
+    --scene-bg: #0b0f12;
     --zen-codelist-bg: hsl(207deg 30% 10%);
 }
 

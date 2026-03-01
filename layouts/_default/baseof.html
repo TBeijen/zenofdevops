@@ -28,9 +28,9 @@
 
     {{/* --- Background images (light / dark) --- */}}
     {{ $bgLight := resources.Get "images/bg-lake-sunrise-gemini.png" }}
-    {{ $bgLightOpt := $bgLight.Process "jpg q85" }}
+    {{ $bgLightOpt := $bgLight.Process "webp q85" }}
     {{ $bgDark := resources.Get "images/bg-lake-moon-bright-gemini.jpg" }}
-    {{ $bgDarkOpt := $bgDark.Process "jpg q85" }}
+    {{ $bgDarkOpt := $bgDark.Process "webp q85" }}
     <link rel="preload" as="image" href="{{ $bgLightOpt.RelPermalink }}">
     <link rel="preload" as="image" href="{{ $bgDarkOpt.RelPermalink }}" media="(prefers-color-scheme: dark)">
 
