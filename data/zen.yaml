@@ -1,6 +1,6 @@
 meta:
   title: "The Zen of DevOps"
-  description: "The Zen of DevOps captures a small set of principles that value clarity, restraint, maintainability and reliability."
+  description: "Timeless guiding principles for DevOps, SRE and Platform Engineering — valuing clarity, restraint, maintainability and reliability."
 items:
   - id: break-non-prod
     title: Be able to break non-production systems
